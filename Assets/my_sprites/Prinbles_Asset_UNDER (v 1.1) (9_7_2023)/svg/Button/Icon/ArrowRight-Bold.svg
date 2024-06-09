@@ -1,0 +1,18 @@
+<svg width="42" height="58" viewBox="0 0 42 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Button/Icon/ArrowRight-Bold">
+<g id="ArrowRight" filter="url(#filter0_d_467_13593)">
+<path d="M38.5777 21.9223C42.5236 25.0006 42.5236 30.8492 38.5777 33.9275L13.0982 53.8046C7.93146 57.8353 0.273951 54.2512 0.273951 47.802L0.273952 8.04773C0.273952 1.59863 7.93146 -1.98556 13.0982 2.04517L38.5777 21.9223Z" fill="#E1F4B1"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_467_13593" x="0.274414" y="0.343811" width="41.2627" height="57.1622" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.439216 0 0 0 0 0.478431 0 0 0 0 0.345098 0 0 0 1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_467_13593"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_467_13593" result="shape"/>
+</filter>
+</defs>
+</svg>

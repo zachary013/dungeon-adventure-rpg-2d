@@ -1,0 +1,18 @@
+<svg width="58" height="56" viewBox="0 0 58 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Button/Icon/Star">
+<g id="Icon" filter="url(#filter0_d_467_13596)">
+<path d="M26.8992 2.0449C27.5989 -0.0520739 30.6453 -0.0520768 31.3449 2.0449L36.4685 17.4009C36.7814 18.3387 37.6788 18.9737 38.6914 18.9737H55.2716C57.5357 18.9737 58.4771 21.7951 56.6454 23.0911L43.2317 32.5817C42.4125 33.1613 42.0698 34.1886 42.3826 35.1264L47.5062 50.4824C48.2059 52.5794 45.7413 54.3232 43.9096 53.0272L30.4959 43.5366C29.6767 42.957 28.5675 42.957 27.7483 43.5366L14.3346 53.0272C12.5029 54.3232 10.0383 52.5794 10.738 50.4824L15.8615 35.1264C16.1744 34.1886 15.8316 33.1613 15.0125 32.5817L1.59879 23.0911C-0.232945 21.7951 0.708439 18.9737 2.97258 18.9737H19.5528C20.5654 18.9737 21.4628 18.3387 21.7757 17.4009L26.8992 2.0449Z" fill="#E1F4B1"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_467_13596" x="0.630859" y="0.472168" width="56.9824" height="55" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.439216 0 0 0 0 0.478431 0 0 0 0 0.345098 0 0 0 1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_467_13596"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_467_13596" result="shape"/>
+</filter>
+</defs>
+</svg>
