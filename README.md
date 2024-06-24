@@ -27,19 +27,19 @@ Dungeon Adventure RPG 2D is a 2D role-playing game that procedurally generates i
 Here are some screenshots of the game:
 
 ### Main Menu
-![Main Menu](Screenshots/1.png)
+![Main Menu](Screenshots/Screenshot1.png)
 
 ### Gameplay
-![Gameplay](Screenshots/2.png)
+![Gameplay](Screenshots/Screenshot2.png)
 
 ### Pause Menu
-![Pause Menu](Screenshots/3.png)
+![Pause Menu](Screenshots/Screenshot3.png)
 
 ### Final Boss Combat
-![Final Boss Combat](Screenshots/4.png)
+![Final Boss Combat](Screenshots/Screenshot4.png)
 
 ### Victory Screen
-![Victory Screen](Screenshots/5.png)
+![Victory Screen](Screenshots/Screenshot5.png)
 
 ## Technologies Used
 - **Unity**: Game engine for development
