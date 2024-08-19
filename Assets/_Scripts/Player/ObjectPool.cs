@@ -25,7 +25,8 @@ public class ObjectPool
     {
         if (poolQueue.Count > 0)
         {
-            return poolQueue.Dequeue();
+            GameObject obj = poolQueue.Dequeue();
+            return obj;
         }
         else
         {

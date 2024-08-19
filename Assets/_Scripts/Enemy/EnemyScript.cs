@@ -10,6 +10,7 @@ public class EnemyScript : MonoBehaviour, IDamageable
     public float knockbackDuration = 0.2f;
     public GameObject deathEffect;
     public GameObject healthBarPrefab;
+    public float pathUpdateInterval = 0.5f; // Interval to update path
 
     private int currentHealth;
     private Transform player;
@@ -21,7 +22,7 @@ public class EnemyScript : MonoBehaviour, IDamageable
     private GridMap gridMap;
     private List<Node> path;
     private int currentPathIndex = 0;
-    private bool isMoving = false;
+    private float nextPathUpdateTime = 0f;
 
     private void Start()
     {
@@ -29,85 +30,59 @@ public class EnemyScript : MonoBehaviour, IDamageable
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         pathfinding = FindObjectOfType<Pathfinding>();
-        gridMap = pathfinding.gridMap;
-
-        // Instantiate and attach the health bar
-        GameObject healthBarObject = Instantiate(healthBarPrefab, transform.position, Quaternion.identity, transform);
-        healthBarInstance = healthBarObject.GetComponent<HealthBarEnemy>();
+        gridMap = FindObjectOfType<GridMap>();
+        healthBarInstance = Instantiate(healthBarPrefab, transform.position, Quaternion.identity).GetComponent<HealthBarEnemy>();
+        healthBarInstance.UpdateHealthBar(maxHealth, currentHealth);
     }
 
     private void Update()
     {
         if (isKnockedBack)
         {
-            rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, knockbackDuration * Time.deltaTime);
             if (Time.time >= knockbackEndTime)
             {
                 isKnockedBack = false;
             }
-        }
-        else
-        {
-            if (!isMoving)
-            {
-                path = pathfinding.FindPath(transform.position, player.position);
-                if (path != null && path.Count > 0)
-                {
-                    isMoving = true;
-                    currentPathIndex = 0;
-                }
-            }
-            else
-            {
-                MoveAlongPath();
-            }
+            return;
         }
 
-        // Update health bar position to follow the enemy
-        if (healthBarInstance != null)
+        if (player != null && Time.time >= nextPathUpdateTime)
         {
-            Vector3 healthBarPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
-            healthBarInstance.transform.position = Camera.main.WorldToScreenPoint(healthBarPosition);
+            UpdatePath();
+            nextPathUpdateTime = Time.time + pathUpdateInterval;
         }
+
+        MoveAlongPath();
+    }
+
+    private void UpdatePath()
+    {
+        path = pathfinding.FindPath(transform.position, player.position);
+        currentPathIndex = 0;
     }
 
     private void MoveAlongPath()
     {
-        if (path != null && currentPathIndex < path.Count)
-        {
-            Vector3 targetPosition = path[currentPathIndex].worldPosition;
-            Vector2 direction = (targetPosition - transform.position).normalized;
-            transform.Translate(direction * speed * Time.deltaTime);
+        if (path == null || path.Count == 0) return;
 
-            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
-            {
-                currentPathIndex++;
-                if (currentPathIndex >= path.Count)
-                {
-                    isMoving = false;
-                }
-            }
-        }
-        else
+        Vector3 targetPosition = path[currentPathIndex].worldPosition;
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        rb.velocity = direction * speed;
+
+        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {
-            isMoving = false;
+            currentPathIndex++;
+            if (currentPathIndex >= path.Count)
+            {
+                rb.velocity = Vector2.zero;
+            }
         }
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
-        Vector2 knockbackDirection = (transform.position - player.position).normalized;
-        rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
-
-        isKnockedBack = true;
-        knockbackEndTime = Time.time + knockbackDuration;
-
-        if (healthBarInstance != null)
-        {
-            healthBarInstance.UpdateHealthBar(maxHealth, currentHealth);
-        }
+        healthBarInstance.UpdateHealthBar(maxHealth, currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -115,18 +90,16 @@ public class EnemyScript : MonoBehaviour, IDamageable
         }
     }
 
-    public void Die()
+    private void Die()
     {
-        if (deathEffect != null)
-        {
-            Instantiate(deathEffect, transform.position, Quaternion.identity);
-        }
-
-        if (healthBarInstance != null)
-        {
-            Destroy(healthBarInstance.gameObject);
-        }
-
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
+    }
+
+    public void ApplyKnockback(Vector2 direction)
+    {
+        isKnockedBack = true;
+        knockbackEndTime = Time.time + knockbackDuration;
+        rb.velocity = direction * knockbackForce;
     }
 }
